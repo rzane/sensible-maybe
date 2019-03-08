@@ -1,4 +1,4 @@
-# @rzane/maybe
+# sensible-maybe
 
 A pretty barebones maybe implementation of a Maybe in TypeScript. Let's try to stay practical. You don't need to build your entire application with this thing.
 
