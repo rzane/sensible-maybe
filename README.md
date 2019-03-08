@@ -2,6 +2,8 @@
 
 A pretty barebones Maybe implementation in TypeScript. Let's try to stay practical. You don't need to build your entire application with this thing.
 
+[View the documentation](docs/README.md)
+
 ## Installing
 
     $ yarn add sensible-maybe
