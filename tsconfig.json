@@ -4,6 +4,7 @@
     "importHelpers": true,
     "target": "es2018",
     "module": "esnext",
+    "esModuleInterop": true,
     "outDir": "lib",
     "rootDir": "src",
     "strict": true,
