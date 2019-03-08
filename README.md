@@ -1,15 +1,15 @@
 # sensible-maybe
 
-A pretty barebones maybe implementation of a Maybe in TypeScript. Let's try to stay practical. You don't need to build your entire application with this thing.
+A pretty barebones Maybe implementation in TypeScript. Let's try to stay practical. You don't need to build your entire application with this thing.
 
 ## Installing
 
-    $ yarn add @rzane/maybe
+    $ yarn add sensible-maybe
 
 ## Example
 
 ```typescript
-import { Maybe } from "@rzane/maybe";
+import { Maybe } from "sensible-maybe";
 
 Maybe.of(getUser())
   .map(user => user.profile)
