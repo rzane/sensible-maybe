@@ -1,0 +1,10 @@
+{
+  "name": "@rzane/maybe",
+  "version": "1.0.0",
+  "description": "A really small maybe function",
+  "main": "lib/index.js",
+  "types": "lib/types.d.ts",
+  "repository": "https://github.com/rzane/maybe",
+  "author": "Ray Zane",
+  "license": "MIT"
+}
