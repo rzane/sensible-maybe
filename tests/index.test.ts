@@ -1,106 +1,132 @@
-import { fromNullable } from "../src";
+import { Maybe } from "../src";
 
 describe("isNothing", () => {
   test("when the value is present", () => {
-    expect(fromNullable(0).isNothing()).toEqual(false);
-    expect(fromNullable("").isNothing()).toEqual(false);
-    expect(fromNullable([]).isNothing()).toEqual(false);
+    expect(Maybe.of(0).isNothing()).toEqual(false);
+    expect(Maybe.of("").isNothing()).toEqual(false);
+    expect(Maybe.of([]).isNothing()).toEqual(false);
   });
 
   test("when the value is nothing", () => {
-    expect(fromNullable(null).isNothing()).toEqual(true);
-    expect(fromNullable(undefined).isNothing()).toEqual(true);
+    expect(Maybe.of(null).isNothing()).toEqual(true);
+    expect(Maybe.of(undefined).isNothing()).toEqual(true);
   });
 });
 
-describe("value", () => {
+describe("get", () => {
   test("when the value is present", () => {
-    expect(fromNullable(0).value()).toEqual(0);
-    expect(fromNullable("").value()).toEqual("");
-    expect(fromNullable([]).value()).toEqual([]);
+    expect(Maybe.of(0).get()).toEqual(0);
+    expect(Maybe.of("").get()).toEqual("");
+    expect(Maybe.of([]).get()).toEqual([]);
   });
 
   test("when the value is nothing", () => {
-    expect(fromNullable(null).value()).toBeUndefined();
-    expect(fromNullable(undefined).value()).toBeUndefined();
+    expect(Maybe.of(null).get()).toBeUndefined();
+    expect(Maybe.of(undefined).get()).toBeUndefined();
   });
 });
 
-describe("valueOr", () => {
+describe("getOrElse", () => {
   test("when the value is preset", () => {
-    expect(fromNullable(0).valueOr(9)).toEqual(0);
-    expect(fromNullable("").valueOr(9)).toEqual("");
-    expect(fromNullable([]).valueOr(9)).toEqual([]);
+    expect(Maybe.of(0).getOrElse(9)).toEqual(0);
+    expect(Maybe.of("").getOrElse(9)).toEqual("");
+    expect(Maybe.of([]).getOrElse(9)).toEqual([]);
   });
 
   test("when the value is nothing", () => {
-    expect(fromNullable(null).valueOr(9)).toEqual(9);
-    expect(fromNullable(undefined).valueOr(9)).toEqual(9);
+    expect(Maybe.of(null).getOrElse(9)).toEqual(9);
+    expect(Maybe.of(undefined).getOrElse(9)).toEqual(9);
+  });
+});
+
+describe("orElse", () => {
+  test("when the value is present", () => {
+    const maybe = Maybe.just(1).orElse(7);
+    expect(maybe.get()).toEqual(1);
+  });
+
+  test("when the value is nothing", () => {
+    const maybe = Maybe.nothing<number>().orElse(7);
+    expect(maybe.get()).toEqual(7);
   });
 });
 
 describe("map", () => {
   test("when the value is present", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = fromNullable(0).map(fn);
+    const maybe = Maybe.just(0).map(fn);
 
-    expect(maybe.value()).toEqual(5);
+    expect(maybe.get()).toEqual(5);
     expect(fn).toHaveBeenCalledWith(0);
   });
 
   test("when the value is nothing", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = fromNullable<number>(null).map(fn);
+    const maybe = Maybe.nothing<number>().map(fn);
 
-    expect(maybe.value()).toEqual(undefined);
+    expect(maybe.get()).toBeUndefined();
     expect(fn).not.toHaveBeenCalled();
+  });
+});
+
+describe("chain", () => {
+  test("when the value is present", () => {
+    const fn = jest.fn(v => Maybe.just(v + 5));
+    const maybe = Maybe.just(0).chain(fn);
+
+    expect(maybe.get()).toEqual(5);
+    expect(fn).toHaveBeenCalledWith(0);
+  });
+
+  test("when the value is nothing", () => {
+    const fn = jest.fn(v => Maybe.just(v + 5));
+    const maybe = Maybe.nothing<number>().chain(fn);
+
+    expect(maybe.get()).toBeUndefined();
+    expect(fn).not.toHaveBeenCalled();
+  });
+});
+
+describe("filter", () => {
+  test("when the value is nothing", () => {
+    const original = Maybe.nothing();
+    const result = original.filter(() => true);
+
+    expect(result).toBe(original);
+    expect(result.get()).toBeUndefined();
+  });
+
+  test("when the predicate is truthy", () => {
+    const original = Maybe.just(1);
+    const result = original.filter(v => v === 1);
+
+    expect(result).toBe(original);
+    expect(result.get()).toEqual(1);
+  });
+
+  test("when the predicate is falsy", () => {
+    const original = Maybe.just(1);
+    const result = original.filter(v => v !== 1);
+
+    expect(result).not.toBe(original);
+    expect(result.get()).toBeUndefined();
   });
 });
 
 describe("then", () => {
   test("when the value is present", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = fromNullable(0).then(fn);
+    const maybe = Maybe.just(0).then(fn);
 
-    expect(maybe.value()).toEqual(0);
+    expect(maybe.get()).toEqual(0);
     expect(fn).toHaveBeenCalledWith(0);
   });
 
   test("when the value is nothing", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = fromNullable<number>(null).then(fn);
+    const maybe = Maybe.nothing<number>().then(fn);
 
-    expect(maybe.value()).toEqual(undefined);
+    expect(maybe.get()).toBeUndefined();
     expect(fn).not.toHaveBeenCalled();
-  });
-});
-
-describe("match", () => {
-  test("when the value is present", () => {
-    const just = jest.fn(v => v + 5);
-    const nothing = jest.fn(() => 9);
-
-    const value = fromNullable(0).match({
-      just,
-      nothing
-    });
-
-    expect(value).toEqual(5);
-    expect(just).toHaveBeenCalledWith(0);
-    expect(nothing).not.toHaveBeenCalled();
-  });
-
-  test("when the value is nothing", () => {
-    const just = jest.fn(v => v + 5);
-    const nothing = jest.fn(() => 9);
-
-    const value = fromNullable<number>(null).match({
-      just,
-      nothing
-    });
-
-    expect(value).toEqual(9);
-    expect(just).not.toHaveBeenCalled();
-    expect(nothing).toHaveBeenCalled();
   });
 });
