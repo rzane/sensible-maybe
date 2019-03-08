@@ -2,9 +2,27 @@
   "name": "@rzane/maybe",
   "version": "1.0.0",
   "description": "A really small maybe function",
-  "main": "lib/index.js",
-  "types": "lib/types.d.ts",
   "repository": "https://github.com/rzane/maybe",
   "author": "Ray Zane",
-  "license": "MIT"
+  "license": "MIT",
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.3.4",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-ts-standard-pkg": "^0.3.14",
+    "typescript": "^3.3.3333"
+  }
 }
