@@ -1,0 +1,12 @@
+{
+  "name": "sensible-maybe",
+  "theme": "markdown",
+  "out": "./docs",
+  "mode": "file",
+  "tsconfig": "tsconfig.json",
+  "src": ["./src/index.ts"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "excludeNotExported": true
+}

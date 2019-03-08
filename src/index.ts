@@ -4,6 +4,9 @@ const isNothing = (value: any): value is null | undefined => {
   return value === null || value === undefined;
 };
 
+/**
+ * Encapsulates a value that may or may not be present.
+ */
 export class Maybe<T> {
   private value: T | Nothing;
 
