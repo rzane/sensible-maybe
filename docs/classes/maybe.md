@@ -15,6 +15,7 @@ Encapsulates a value that may or may not be present.
 ### Methods
 
 * [chain](maybe.md#chain)
+* [expect](maybe.md#expect)
 * [filter](maybe.md#filter)
 * [forEach](maybe.md#foreach)
 * [get](maybe.md#get)
@@ -36,7 +37,7 @@ Encapsulates a value that may or may not be present.
 
 ▸ **chain**<`U`>(fn: *`function`*): [Maybe](maybe.md)<`U`>
 
-*Defined in [index.ts:80](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L80)*
+*Defined in [index.ts:92](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L92)*
 
 Returns the result of applying the provided function to the value contained in the Just instance. If the instance is a Nothing, then a Nothing is returned.
 
@@ -52,13 +53,32 @@ Returns the result of applying the provided function to the value contained in t
 **Returns:** [Maybe](maybe.md)<`U`>
 
 ___
+<a id="expect"></a>
+
+###  expect
+
+▸ **expect**(message: *`string`*): `T`
+
+*Defined in [index.ts:71](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L71)*
+
+Returns the value if the instance is a Just, otherwise a `TypeError` will be thrown with the provided message.
+
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| message | `string` |
+
+**Returns:** `T`
+
+___
 <a id="filter"></a>
 
 ###  filter
 
 ▸ **filter**(fn: *`function`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:95](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L95)*
+*Defined in [index.ts:107](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L107)*
 
 Converts a Just to a Nothing if the provided function returns falsy.
 
@@ -77,7 +97,7 @@ ___
 
 ▸ **forEach**(fn: *`function`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:105](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L105)*
+*Defined in [index.ts:117](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L117)*
 
 Returns itself after applying the provided function to the value contained in the Just instance. If the instance is a Nothing, then the function will not be called. This method is intended for side-effects.
 
@@ -96,7 +116,7 @@ ___
 
 ▸ **get**(): `T` \| `undefined`
 
-*Defined in [index.ts:55](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L55)*
+*Defined in [index.ts:55](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L55)*
 
 Returns the value if the instance is a Just, otherwise `undefined` will be returned.
 
@@ -109,7 +129,7 @@ ___
 
 ▸ **getOrElse**<`U`>(defaultValue: *`U`*): `T` \| `U`
 
-*Defined in [index.ts:63](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L63)*
+*Defined in [index.ts:63](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L63)*
 
 Returns the value if the instance is a Just, otherwise the provided default value will be returned.
 
@@ -131,7 +151,7 @@ ___
 
 ▸ **isNothing**(): `boolean`
 
-*Defined in [index.ts:47](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L47)*
+*Defined in [index.ts:47](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L47)*
 
 Returns `true` if the value is empty.
 
@@ -144,7 +164,7 @@ ___
 
 ▸ **map**<`U`>(fn: *`function`*): [Maybe](maybe.md)<`U`>
 
-*Defined in [index.ts:88](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L88)*
+*Defined in [index.ts:100](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L100)*
 
 Transforms the value of a Just with the provided function, returning a new Just. If Nothing is received, Nothing will be returned.
 
@@ -166,7 +186,7 @@ ___
 
 ▸ **orElse**<`U`>(defaultValue: *`U`*): [Maybe](maybe.md)<`T` \| `U`>
 
-*Defined in [index.ts:71](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L71)*
+*Defined in [index.ts:83](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L83)*
 
 Returns itself if the instance is a Just, otherwise a `Maybe` containing the `defaultValue` will be returned.
 
@@ -188,7 +208,7 @@ ___
 
 ▸ **just**<`T`>(value: *`T`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:23](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L23)*
+*Defined in [index.ts:23](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L23)*
 
 Constructs a Maybe instance that represents the existence of some value.
 
@@ -210,7 +230,7 @@ ___
 
 ▸ **nothing**<`T`>(): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:36](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L36)*
+*Defined in [index.ts:36](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L36)*
 
 Constructs a Maybe instance that represents the absence of a value.
 
@@ -227,7 +247,7 @@ ___
 
 ▸ **of**<`T`>(value: *`T` \| [Nothing](../#nothing)*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:16](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L16)*
+*Defined in [index.ts:16](https://github.com/rzane/maybe/blob/624e8fb/src/index.ts#L16)*
 
 Constructs a Maybe instance that represents a given value.
 

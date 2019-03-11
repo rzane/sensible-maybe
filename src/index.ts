@@ -65,6 +65,18 @@ export class Maybe<T> {
   }
 
   /**
+   * Returns the value if the instance is a Just, otherwise a `TypeError`
+   * will be thrown with the provided message.
+   */
+  public expect(message: string): T {
+    if (isNothing(this.value)) {
+      throw new TypeError(message);
+    }
+
+    return this.value;
+  }
+
+  /**
    * Returns itself if the instance is a Just, otherwise a `Maybe` containing
    * the `defaultValue` will be returned.
    */

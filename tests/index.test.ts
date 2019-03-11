@@ -39,6 +39,21 @@ describe("getOrElse", () => {
   });
 });
 
+describe("expect", () => {
+  test("when the value is preset", () => {
+    expect(Maybe.of(0).expect("foo")).toEqual(0);
+    expect(Maybe.of("").expect("foo")).toEqual("");
+    expect(Maybe.of([]).expect("foo")).toEqual([]);
+  });
+
+  test("when the value is nothing", () => {
+    expect(() => Maybe.of(null).expect("foo")).toThrow(new TypeError("foo"));
+    expect(() => Maybe.of(undefined).expect("foo")).toThrow(
+      new TypeError("foo")
+    );
+  });
+});
+
 describe("orElse", () => {
   test("when the value is present", () => {
     const maybe = Maybe.just(1).orElse(7);
