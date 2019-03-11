@@ -4,6 +4,8 @@ sensible-maybe
 
 A pretty barebones Maybe implementation in TypeScript. Let's try to stay practical. You don't need to build your entire application with this thing.
 
+[View the documentation](docs/README.md)
+
 Installing
 ----------
 
@@ -46,7 +48,7 @@ Maybe.of(getUser())
 
 **Ƭ Nothing**: *`null` \| `undefined`*
 
-*Defined in [index.ts:1](https://github.com/rzane/maybe/blob/868be71/src/index.ts#L1)*
+*Defined in [index.ts:1](https://github.com/rzane/maybe/blob/00b09d3/src/index.ts#L1)*
 
 ___
 

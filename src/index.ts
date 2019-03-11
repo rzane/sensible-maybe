@@ -102,7 +102,7 @@ export class Maybe<T> {
    * the function will not be called. This method is intended for
    * side-effects.
    */
-  public then(fn: (value: T) => void): Maybe<T> {
+  public forEach(fn: (value: T) => void): Maybe<T> {
     if (!isNothing(this.value)) {
       fn(this.value);
     }

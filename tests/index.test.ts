@@ -113,10 +113,10 @@ describe("filter", () => {
   });
 });
 
-describe("then", () => {
+describe("forEach", () => {
   test("when the value is present", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = Maybe.just(0).then(fn);
+    const maybe = Maybe.just(0).forEach(fn);
 
     expect(maybe.get()).toEqual(0);
     expect(fn).toHaveBeenCalledWith(0);
@@ -124,7 +124,7 @@ describe("then", () => {
 
   test("when the value is nothing", () => {
     const fn = jest.fn(v => v + 5);
-    const maybe = Maybe.nothing<number>().then(fn);
+    const maybe = Maybe.nothing<number>().forEach(fn);
 
     expect(maybe.get()).toBeUndefined();
     expect(fn).not.toHaveBeenCalled();
