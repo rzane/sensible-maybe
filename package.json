@@ -1,6 +1,6 @@
 {
   "name": "sensible-maybe",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A really small maybe function",
   "repository": "https://github.com/rzane/maybe",
   "author": "Ray Zane",
