@@ -15,6 +15,7 @@ Encapsulates a value that may or may not be present.
 ### Methods
 
 * [chain](maybe.md#chain)
+* [either](maybe.md#either)
 * [expect](maybe.md#expect)
 * [filter](maybe.md#filter)
 * [forEach](maybe.md#foreach)
@@ -37,7 +38,7 @@ Encapsulates a value that may or may not be present.
 
 ▸ **chain**<`U`>(fn: *`function`*): [Maybe](maybe.md)<`U`>
 
-*Defined in [index.ts:92](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L92)*
+*Defined in [index.ts:111](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L111)*
 
 Returns the result of applying the provided function to the value contained in the Just instance. If the instance is a Nothing, then a Nothing is returned.
 
@@ -53,13 +54,37 @@ Returns the result of applying the provided function to the value contained in t
 **Returns:** [Maybe](maybe.md)<`U`>
 
 ___
+<a id="either"></a>
+
+###  either
+
+▸ **either**<`L`,`R`>(whenJust: *`L` \| `function`*, whenNothing: *`R` \| `function`*): `L` \| `R`
+
+*Defined in [index.ts:87](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L87)*
+
+Returns the result of `whenJust` if the value is a Just, otherwise the result of `whenNothing` will be returned.
+
+**Type parameters:**
+
+#### L 
+#### R 
+**Parameters:**
+
+| Name | Type |
+| ------ | ------ |
+| whenJust | `L` \| `function` |
+| whenNothing | `R` \| `function` |
+
+**Returns:** `L` \| `R`
+
+___
 <a id="expect"></a>
 
 ###  expect
 
 ▸ **expect**(message: *`string`*): `T`
 
-*Defined in [index.ts:71](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L71)*
+*Defined in [index.ts:75](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L75)*
 
 Returns the value if the instance is a Just, otherwise a `TypeError` will be thrown with the provided message.
 
@@ -78,7 +103,7 @@ ___
 
 ▸ **filter**(fn: *`function`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:107](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L107)*
+*Defined in [index.ts:126](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L126)*
 
 Converts a Just to a Nothing if the provided function returns falsy.
 
@@ -97,7 +122,7 @@ ___
 
 ▸ **forEach**(fn: *`function`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:117](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L117)*
+*Defined in [index.ts:136](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L136)*
 
 Returns itself after applying the provided function to the value contained in the Just instance. If the instance is a Nothing, then the function will not be called. This method is intended for side-effects.
 
@@ -116,7 +141,7 @@ ___
 
 ▸ **get**(): `T` \| `undefined`
 
-*Defined in [index.ts:55](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L55)*
+*Defined in [index.ts:59](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L59)*
 
 Returns the value if the instance is a Just, otherwise `undefined` will be returned.
 
@@ -129,7 +154,7 @@ ___
 
 ▸ **getOrElse**<`U`>(defaultValue: *`U`*): `T` \| `U`
 
-*Defined in [index.ts:63](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L63)*
+*Defined in [index.ts:67](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L67)*
 
 Returns the value if the instance is a Just, otherwise the provided default value will be returned.
 
@@ -151,7 +176,7 @@ ___
 
 ▸ **isNothing**(): `boolean`
 
-*Defined in [index.ts:47](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L47)*
+*Defined in [index.ts:51](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L51)*
 
 Returns `true` if the value is empty.
 
@@ -164,7 +189,7 @@ ___
 
 ▸ **map**<`U`>(fn: *`function`*): [Maybe](maybe.md)<`U`>
 
-*Defined in [index.ts:100](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L100)*
+*Defined in [index.ts:119](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L119)*
 
 Transforms the value of a Just with the provided function, returning a new Just. If Nothing is received, Nothing will be returned.
 
@@ -186,7 +211,7 @@ ___
 
 ▸ **orElse**<`U`>(defaultValue: *`U`*): [Maybe](maybe.md)<`T` \| `U`>
 
-*Defined in [index.ts:83](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L83)*
+*Defined in [index.ts:102](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L102)*
 
 Returns itself if the instance is a Just, otherwise a `Maybe` containing the `defaultValue` will be returned.
 
@@ -208,7 +233,7 @@ ___
 
 ▸ **just**<`T`>(value: *`T`*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:23](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L23)*
+*Defined in [index.ts:27](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L27)*
 
 Constructs a Maybe instance that represents the existence of some value.
 
@@ -230,7 +255,7 @@ ___
 
 ▸ **nothing**<`T`>(): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:36](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L36)*
+*Defined in [index.ts:40](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L40)*
 
 Constructs a Maybe instance that represents the absence of a value.
 
@@ -247,7 +272,7 @@ ___
 
 ▸ **of**<`T`>(value: *`T` \| [Nothing](../#nothing)*): [Maybe](maybe.md)<`T`>
 
-*Defined in [index.ts:16](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L16)*
+*Defined in [index.ts:20](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L20)*
 
 Constructs a Maybe instance that represents a given value.
 

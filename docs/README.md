@@ -48,7 +48,7 @@ Maybe.of(getUser())
 
 **Ƭ Nothing**: *`null` \| `undefined`*
 
-*Defined in [index.ts:1](https://github.com/rzane/sensible-maybe/blob/6749b97/src/index.ts#L1)*
+*Defined in [index.ts:1](https://github.com/rzane/sensible-maybe/blob/bc883f7/src/index.ts#L1)*
 
 ___
 
