@@ -128,6 +128,20 @@ describe("filter", () => {
   });
 });
 
+describe("either", () => {
+  test("when the value is present", () => {
+    expect(Maybe.just(1).either(true, false)).toEqual(true);
+    expect(Maybe.just(1).either(() => true, false)).toEqual(true);
+    expect(Maybe.just(1).either(() => true, () => false)).toEqual(true);
+  });
+
+  test("when the value is not present", () => {
+    expect(Maybe.nothing().either(true, false)).toEqual(false);
+    expect(Maybe.nothing().either(() => true, false)).toEqual(false);
+    expect(Maybe.nothing().either(() => true, () => false)).toEqual(false);
+  });
+});
+
 describe("forEach", () => {
   test("when the value is present", () => {
     const fn = jest.fn(v => v + 5);

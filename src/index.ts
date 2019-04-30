@@ -4,6 +4,10 @@ const isNothing = (value: any): value is null | undefined => {
   return value === null || value === undefined;
 };
 
+const isFunction = (value: any): value is Function => {
+  return typeof value === "function";
+};
+
 /**
  * Encapsulates a value that may or may not be present.
  */
@@ -74,6 +78,21 @@ export class Maybe<T> {
     }
 
     return this.value;
+  }
+
+  /**
+   * Returns the result of `whenJust` if the value is a Just, otherwise
+   * the result of `whenNothing` will be returned.
+   */
+  public either<L, R>(
+    whenJust: L | ((value: T) => L),
+    whenNothing: R | (() => R)
+  ): L | R {
+    if (isNothing(this.value)) {
+      return isFunction(whenNothing) ? whenNothing() : whenNothing;
+    }
+
+    return isFunction(whenJust) ? whenJust(this.value) : whenJust;
   }
 
   /**
