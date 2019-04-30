@@ -8,16 +8,24 @@ A pretty barebones Maybe implementation in TypeScript. Let's try to stay practic
 
     $ yarn add sensible-maybe
 
-## Example
+## Examples
 
-```typescript
-import { Maybe } from "sensible-maybe";
+```tsx
+Maybe.of(getUser())
+  .map(user => user.name)
+  .getOrElse("Not signed in");
+
+Maybe.of(getUser()).either(
+  user => <a href="/account">{user.name}</a>,
+  () => <a href="/login">Login</a>
+);
 
 Maybe.of(getUser())
-  .map(user => user.profile)
-  .map(profile => profile.name)
-  .filter(name => name !== "Jerry")
-  .orElse("Unknown")
-  .map(name => `Name: ${name}`)
-  .then(message => console.log(message));
+  .filter(user => user.isAdmin)
+  .map(user => `Admin: ${user.name}`)
+  .getOrElse("Unauthorized!");
+
+Maybe.of(getUser())
+  .map(user => user.name)
+  .forEach(name => console.log(name));
 ```
