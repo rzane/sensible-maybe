@@ -16,7 +16,7 @@
     "prepack": "microbundle --tsconfig tsconfig.build.json",
     "lint": "tsc -p . --noEmit",
     "format": "prettier --write '{src,tests}/**/*.ts'",
-    "docs": "typedoc --options typedoc.config.json"
+    "docs": "typedoc --options typedoc.config.json src/index.ts"
   },
   "files": [
     "dist",

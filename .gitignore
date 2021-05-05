@@ -1,5 +1,6 @@
 /node_modules
 /dist
+/docs/README.md
 
 yarn-error.log
 .DS_Store
