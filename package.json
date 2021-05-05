@@ -3,38 +3,32 @@
   "version": "2.2.0",
   "description": "A really small maybe function",
   "repository": "https://github.com/rzane/maybe",
+  "homepage": "https://github.com/rzane/maybe#readme",
   "author": "Ray Zane",
   "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "pack build",
+    "build": "microbundle --tsconfig tsconfig.build.json",
+    "prepack": "microbundle --tsconfig tsconfig.build.json",
     "lint": "tsc -p . --noEmit",
     "format": "prettier --write '{src,tests}/**/*.ts'",
     "docs": "typedoc --options typedoc.config.json"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "jest": {
     "preset": "ts-jest"
   },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-ts-standard-pkg"
-      ],
-      [
-        "@pika/plugin-build-node"
-      ],
-      [
-        "@pika/plugin-build-web"
-      ]
-    ]
-  },
   "devDependencies": {
-    "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.9.2",
-    "@pika/plugin-build-web": "^0.9.2",
-    "@pika/plugin-ts-standard-pkg": "^0.9.2",
     "@types/jest": "^26.0.23",
     "jest": "^26.6.3",
+    "microbundle": "^0.13.0",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.5",
     "typedoc": "^0.20.36",
