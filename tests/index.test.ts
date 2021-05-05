@@ -68,7 +68,7 @@ describe("orElse", () => {
 
 describe("map", () => {
   test("when the value is present", () => {
-    const fn = jest.fn(v => v + 5);
+    const fn = jest.fn((v) => v + 5);
     const maybe = Maybe.just(0).map(fn);
 
     expect(maybe.get()).toEqual(5);
@@ -76,7 +76,7 @@ describe("map", () => {
   });
 
   test("when the value is nothing", () => {
-    const fn = jest.fn(v => v + 5);
+    const fn = jest.fn((v) => v + 5);
     const maybe = Maybe.nothing<number>().map(fn);
 
     expect(maybe.get()).toBeUndefined();
@@ -86,7 +86,7 @@ describe("map", () => {
 
 describe("chain", () => {
   test("when the value is present", () => {
-    const fn = jest.fn(v => Maybe.just(v + 5));
+    const fn = jest.fn((v) => Maybe.just(v + 5));
     const maybe = Maybe.just(0).chain(fn);
 
     expect(maybe.get()).toEqual(5);
@@ -94,7 +94,7 @@ describe("chain", () => {
   });
 
   test("when the value is nothing", () => {
-    const fn = jest.fn(v => Maybe.just(v + 5));
+    const fn = jest.fn((v) => Maybe.just(v + 5));
     const maybe = Maybe.nothing<number>().chain(fn);
 
     expect(maybe.get()).toBeUndefined();
@@ -113,7 +113,7 @@ describe("filter", () => {
 
   test("when the predicate is truthy", () => {
     const original = Maybe.just(1);
-    const result = original.filter(v => v === 1);
+    const result = original.filter((v) => v === 1);
 
     expect(result).toBe(original);
     expect(result.get()).toEqual(1);
@@ -121,7 +121,16 @@ describe("filter", () => {
 
   test("when the predicate is falsy", () => {
     const original = Maybe.just(1);
-    const result = original.filter(v => v !== 1);
+    const result = original.filter((v) => v !== 1);
+
+    expect(result).not.toBe(original);
+    expect(result.get()).toBeUndefined();
+  });
+
+  test("when given a guard, the type narrows", () => {
+    const isString = (value: any): value is string => typeof value === "string";
+    const original = Maybe.of<string | number>(1);
+    const result = original.filter(isString);
 
     expect(result).not.toBe(original);
     expect(result.get()).toBeUndefined();
@@ -144,7 +153,7 @@ describe("either", () => {
 
 describe("forEach", () => {
   test("when the value is present", () => {
-    const fn = jest.fn(v => v + 5);
+    const fn = jest.fn((v) => v + 5);
     const maybe = Maybe.just(0).forEach(fn);
 
     expect(maybe.get()).toEqual(0);
@@ -152,7 +161,7 @@ describe("forEach", () => {
   });
 
   test("when the value is nothing", () => {
-    const fn = jest.fn(v => v + 5);
+    const fn = jest.fn((v) => v + 5);
     const maybe = Maybe.nothing<number>().forEach(fn);
 
     expect(maybe.get()).toBeUndefined();

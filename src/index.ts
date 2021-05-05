@@ -123,6 +123,8 @@ export class Maybe<T> {
   /**
    * Converts a Just to a Nothing if the provided function returns falsy.
    */
+  public filter<S extends T>(fn: (value: T) => value is S): Maybe<S>;
+  public filter(fn: (value: T) => any): Maybe<T>;
   public filter(fn: (value: T) => any): Maybe<T> {
     return isNothing(this.value) || fn(this.value) ? this : new Maybe();
   }
